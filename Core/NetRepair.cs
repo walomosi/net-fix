@@ -14,6 +14,8 @@ namespace NetFix.Core
 
     internal static class NetRepair
     {
+        // Order matters: flush DNS first (cheap, non-disruptive), then reset Winsock/TCP
+        // which drops all connections, then clear proxy/hosts which are user-level overrides.
         public static System.Collections.Generic.List<RepairStep> RunAll()
         {
             var steps = new System.Collections.Generic.List<RepairStep>();
